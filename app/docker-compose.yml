@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  node:
+    image: node:14.12.0-alpine3.10
+    user: node
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: "node dist/app.js"
+    restart: on-failure
+    environment:
+      - "PRODUCTION=$PRODUCTION"
+      - 'INKCLOUD_HOST=$INKCLOUD_HOST'
+      - "PROTOCOL=$PROTOCOL"
+      - "NODE_TLS_REJECT_UNAUTHORIZED=0"
+    ports:
+      - 3300:3000
